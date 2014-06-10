@@ -40,7 +40,7 @@ get '/auth/github/callback' do
   set_current_user(user)
   flash[:notice] = "You're now signed in as #{user.username}!"
 
-  redirect '/'
+  redirect '/meetups'
 end
 
 get '/sign_out' do
@@ -52,4 +52,10 @@ end
 
 get '/example_protected_page' do
   authenticate!
+end
+
+get '/meetups' do
+  @meetups = Meetup.all
+
+  erb :meetups
 end
