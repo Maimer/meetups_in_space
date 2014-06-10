@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'omniauth-github'
+require 'pry'
 
 require_relative 'config/application'
 
@@ -55,7 +56,14 @@ get '/example_protected_page' do
 end
 
 get '/meetups' do
-  @meetups = Meetup.all
+  @meetups = Meetup.all.order(:name)
 
   erb :meetups
+end
+
+get '/meetups/:id' do
+  @id = params[:id].to_i
+  @meetup = Meetup.find(@id)
+
+  erb :meetup
 end
