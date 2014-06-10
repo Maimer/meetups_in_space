@@ -26,12 +26,12 @@ end
 def authenticate!
   unless signed_in?
     flash[:notice] = 'You need to sign in if you want to do that!'
-    redirect '/'
+    redirect '/meetups'
   end
 end
 
 get '/' do
-  erb :index
+  redirect '/meetups'
 end
 
 get '/auth/github/callback' do
@@ -55,7 +55,7 @@ get '/example_protected_page' do
   authenticate!
 end
 
-get '/meetups' do
+get '/meetups/?' do
   @meetups = Meetup.all.order(:name)
 
   erb :meetups
@@ -67,3 +67,31 @@ get '/meetups/:id' do
 
   erb :meetup
 end
+
+post '/meetups' do
+  authenticate!
+  @record = Meetup.create!(name: params[:meetup_name],
+                           location: params[:meetup_location],
+                           description: params[:meetup_description])
+  Usermeetup.create!(user_id: session[:user_id].to_i, meetup_id: @record.id)
+  flash[:notice] = 'You have successfully created a meetup!'
+
+  redirect to("/meetups/#{@record.id}")
+end
+
+post '/meetups/:id' do
+  Usermeetup.create!(user_id: session[:user_id].to_i, meetup_id: params[:id].to_i)
+  flash[:notice] = 'You have successfully joined a meetup!'
+
+  redirect to("/meetups/#{params[:id]}")
+end
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,11 @@
+<br/>
+<form action="/meetups" method="post">
+  Name: <input name="meetup_name" type="text"><br/>
+  Location: <input name="meetup_location" type="text"><br/>
+  Description: <input name="meetup_description" type="text"><br/>
+  <input type="submit">
+</form>
+<br/>
 <ul>
   <% @meetups.each do |meetup| %>
     <li>

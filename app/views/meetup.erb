@@ -11,6 +11,12 @@ Description: <%= @meetup.description %>
 Members:
 <ul>
   <% @meetup.users.each do |member| %>
-    <li> <%= member.username %> </li>
+    <li> <img height="40" width="40" src="<%= member.avatar_url %>"/> <%= member.username %> </li>
   <% end %>
 </ul>
+
+<% if signed_in? && @meetup.users.find_by(username: current_user.username) == nil %>
+  <form action="/meetups/<%= @id %>" method="post">
+    <input value="Join!" type="submit">
+  </form>
+<% end %>
