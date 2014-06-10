@@ -25,6 +25,27 @@ Members:
   <% end %>
 </ul>
 
+<br/><br/>
 
+<% if signed_in? && @meetup.users.find_by(username: current_user.username) != nil %>
+  Leave a Comment:
+  <form action="/meetups/<%= @id %>/comment" method="post">
+    Title: <input name="comment_title" type="text"><br/>
+    Body: <textarea name="comment_body"></textarea><br/>
+    <input type="submit">
+  </form>
+<% end %>
 
+<br/><br/>
 
+<ul>
+  <% @comments.each do |comment| %>
+    </li>Title: <%= comment.title %>
+    <br/>
+    <%= comment.body %>
+    <br/>
+    <%= comment.created_at %></li>
+    <br/>
+    <br/>
+  <% end %>
+</ul>

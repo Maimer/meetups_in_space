@@ -64,6 +64,7 @@ end
 get '/meetups/:id' do
   @id = params[:id].to_i
   @meetup = Meetup.find(@id)
+  @comments = @meetup.comments.order(created_at: :desc)
 
   erb :meetup
 end
@@ -91,9 +92,14 @@ post '/meetups/:id' do
   redirect to("/meetups/#{params[:id]}")
 end
 
+post '/meetups/:id/comment' do
+  Comment.create!(title: params["comment_title"],
+                  body: params["comment_body"],
+                  user_id: session[:user_id].to_i,
+                  meetup_id: params[:id].to_i)
 
-
-
+  redirect to("/meetups/#{params[:id]}")
+end
 
 
 
