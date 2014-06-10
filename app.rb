@@ -80,8 +80,13 @@ post '/meetups' do
 end
 
 post '/meetups/:id' do
-  Usermeetup.create!(user_id: session[:user_id].to_i, meetup_id: params[:id].to_i)
-  flash[:notice] = 'You have successfully joined a meetup!'
+  if params["join"] == "Join!"
+    Usermeetup.create!(user_id: session[:user_id].to_i, meetup_id: params[:id].to_i)
+    flash[:notice] = 'You have successfully joined a meetup!'
+  elsif params["leave"] == "Leave!"
+    Usermeetup.where(user_id: session[:user_id].to_i, meetup_id: params[:id].to_i).destroy_all
+    flash[:notice] = 'You have successfully left a meetup!'
+  end
 
   redirect to("/meetups/#{params[:id]}")
 end

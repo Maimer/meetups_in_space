@@ -1,3 +1,13 @@
+<% if signed_in? && @meetup.users.find_by(username: current_user.username) == nil %>
+  <form action="/meetups/<%= @id %>" method="post">
+    <input value="Join!" name="join" type="submit">
+  </form>
+<% elsif signed_in? && @meetup.users.find_by(username: current_user.username) != nil %>
+  <form action="/meetups/<%= @id %>" method="post">
+    <input value="Leave!" name="leave" type="submit">
+  </form>
+<% end %>
+
 <br/>
 Name: <%= @meetup.name %>
 <br/><br/>
@@ -15,8 +25,6 @@ Members:
   <% end %>
 </ul>
 
-<% if signed_in? && @meetup.users.find_by(username: current_user.username) == nil %>
-  <form action="/meetups/<%= @id %>" method="post">
-    <input value="Join!" type="submit">
-  </form>
-<% end %>
+
+
+
