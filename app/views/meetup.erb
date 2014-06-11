@@ -1,50 +1,58 @@
-<% if signed_in? && @meetup.users.find_by(username: current_user.username) == nil %>
-  <form action="/meetups/<%= @id %>" method="post">
-    <input value="Join!" name="join" type="submit">
-  </form>
-<% elsif signed_in? && @meetup.users.find_by(username: current_user.username) != nil %>
-  <form action="/meetups/<%= @id %>" method="post">
-    <input value="Leave!" name="leave" type="submit">
-  </form>
-<% end %>
+<div class="right">
+  <% if signed_in? && @meetup.users.find_by(username: current_user.username) == nil %>
+    <form action="/meetups/<%= @id %>" method="post">
+      <input value="Join!" name="join" type="submit">
+    </form>
+  <% elsif signed_in? && @meetup.users.find_by(username: current_user.username) != nil %>
+    <form action="/meetups/<%= @id %>" method="post">
+      <input value="Leave!" name="leave" type="submit">
+    </form>
+  <% end %>
+</div>
 
 <br/>
-Name: <%= @meetup.name %>
+<span class="teal">Name:</span> <%= @meetup.name %>
 <br/><br/>
 
-Location: <%= @meetup.location %>
+<span class="teal">Location:</span> <%= @meetup.location %>
 <br/><br/>
 
-Description: <%= @meetup.description %>
+<span class="teal">Description:</span> <%= @meetup.description %>
 <br/><br/>
 
-Members:
+<span class="teal">Members:</span>
 <ul>
   <% @meetup.users.each do |member| %>
-    <li> <img height="40" width="40" src="<%= member.avatar_url %>"/> <%= member.username %> </li>
+    <li>
+      <img height="40" width="40" src="<%= member.avatar_url %>"/>
+      <%= member.username %>
+    </li>
   <% end %>
 </ul>
 
 <br/><br/>
 
 <% if signed_in? && @meetup.users.find_by(username: current_user.username) != nil %>
-  Leave a Comment:
+  <span class="teal">Leave a Comment:</span>
+  <br/><br/>
   <form action="/meetups/<%= @id %>/comment" method="post">
-    Title: <input name="comment_title" type="text"><br/>
-    Body: <textarea name="comment_body"></textarea><br/>
+    <span class="teal">Title:</span><br/>
+    <input name="comment_title" type="text" size="30"><br/>
+    <span class="teal">Body:</span><br/>
+    <textarea name="comment_body" rows="2" cols="31"></textarea><br/>
     <input type="submit">
   </form>
 <% end %>
 
 <br/><br/>
-
+<span class="teal">Comments:</span>
 <ul>
   <% @comments.each do |comment| %>
-    </li>Title: <%= comment.title %>
-    <br/>
-    <%= comment.body %>
-    <br/>
-    <%= comment.created_at %></li>
+    </li>
+      <%= comment.title %> -
+      <span class="teal"><%= comment.body %></span> -
+      <%= comment.created_at.strftime("at %I:%M%p") %>
+    </li>
     <br/>
     <br/>
   <% end %>

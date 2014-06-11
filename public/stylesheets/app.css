@@ -15,21 +15,33 @@ a:hover {
 }
 
 input {
-  color: #000000;
+  color: #18A7B5;
 }
 
 textarea {
-  color: #000000;
+  color: #18A7B5;
 }
 
 li {
   list-style-type: none;
 }
 
+.teal {
+  color: #18A7B5;
+}
+
+.right {
+  float:right;
+}
+
 .container {
   max-width: 1024px;
   margin: 0 auto;
   overflow: auto;
+}
+
+.main {
+  padding: 35px;
 }
 
 .top-bar {
