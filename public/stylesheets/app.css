@@ -16,10 +16,9 @@ a:hover {
 
 input {
   color: #18A7B5;
-}
-
-textarea {
-  color: #18A7B5;
+  background-color: #444;
+  border: 1px solid #555;
+  padding: 5px;
 }
 
 li {
@@ -32,6 +31,10 @@ li {
 
 .right {
   float:right;
+}
+
+.indent {
+  margin-left: 40px;
 }
 
 .container {

@@ -24,28 +24,25 @@
 <ul>
   <% @meetup.users.each do |member| %>
     <li>
-      <img height="40" width="40" src="<%= member.avatar_url %>"/>
+      <img height="60" width="60" src="<%= member.avatar_url %>"/>
       <%= member.username %>
     </li>
   <% end %>
 </ul>
 
-<br/><br/>
-
 <% if signed_in? && @meetup.users.find_by(username: current_user.username) != nil %>
+  <br/>
   <span class="teal">Leave a Comment:</span>
   <br/><br/>
-  <form action="/meetups/<%= @id %>/comment" method="post">
-    <span class="teal">Title:</span><br/>
-    <input name="comment_title" type="text" size="30"><br/>
-    <span class="teal">Body:</span><br/>
-    <textarea name="comment_body" rows="2" cols="31"></textarea><br/>
+  <form class="indent" action="/meetups/<%= @id %>/comment" method="post">
+    <input name="comment_title" type="text" size="20" value="title"
+    onfocus="if (this.value=='title') this.value='';">
+    <input name="comment_body" rows="1" cols="22" value="comment"
+    onfocus="if (this.value=='comment') this.value='';">
     <input type="submit">
   </form>
 <% end %>
 
-<br/><br/>
-<span class="teal">Comments:</span>
 <ul>
   <% @comments.each do |comment| %>
     </li>
