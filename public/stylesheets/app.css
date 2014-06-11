@@ -10,9 +10,26 @@ a:visited {
   text-decoration: none;
 }
 
+a:hover {
+  color: #18A7B5;
+}
+
+input {
+  color: #000000;
+}
+
+textarea {
+  color: #000000;
+}
+
+li {
+  list-style-type: none;
+}
+
 .container {
   max-width: 1024px;
   margin: 0 auto;
+  overflow: auto;
 }
 
 .top-bar {
@@ -30,6 +47,7 @@ a:visited {
 }
 
 .logo {
+  float: left;
   display: inline-block;
   margin: 1em 0;
 }
